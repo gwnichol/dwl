@@ -32,7 +32,8 @@ static const MonitorRule monrules[] = {
 	{ "eDP-1",    0.5,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
 	*/
 	/* defaults */
-	{ NULL,       0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL },
+	{ "DVI-D-1",       0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 0, 0 },
+	{ "DP-2",       0.55, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL, 1920, 0 },
 };
 
 /* keyboard */

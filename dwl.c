@@ -191,6 +191,8 @@ typedef struct {
 	float scale;
 	const Layout *lt;
 	enum wl_output_transform rr;
+	int lx;
+	int ly;
 } MonitorRule;
 
 typedef struct {
@@ -878,6 +880,7 @@ createmon(struct wl_listener *listener, void *data)
 	struct wlr_output *wlr_output = data;
 	const MonitorRule *r;
 	Monitor *m = wlr_output->data = ecalloc(1, sizeof(*m));
+	int lx = -1, ly = -1;
 	m->wlr_output = wlr_output;
 
 	wlr_output_init_render(wlr_output, alloc, drw);
@@ -885,6 +888,7 @@ createmon(struct wl_listener *listener, void *data)
 	/* Initialize monitor state using configured rules */
 	for (size_t i = 0; i < LENGTH(m->layers); i++)
 		wl_list_init(&m->layers[i]);
+
 	m->tagset[0] = m->tagset[1] = 1;
 	for (r = monrules; r < END(monrules); r++) {
 		if (!r->name || strstr(wlr_output->name, r->name)) {
@@ -894,6 +898,8 @@ createmon(struct wl_listener *listener, void *data)
 			wlr_xcursor_manager_load(cursor_mgr, r->scale);
 			m->lt[0] = m->lt[1] = r->lt;
 			wlr_output_set_transform(wlr_output, r->rr);
+			lx = r->lx;
+			ly = r->ly;
 			break;
 		}
 	}
@@ -923,7 +929,11 @@ createmon(struct wl_listener *listener, void *data)
 	 * output (such as DPI, scale factor, manufacturer, etc).
 	 */
 	m->scene_output = wlr_scene_output_create(scene, wlr_output);
-	wlr_output_layout_add_auto(output_layout, wlr_output);
+	if(lx < 0 || ly < 0) {
+		wlr_output_layout_add_auto(output_layout, wlr_output);
+	} else {
+		wlr_output_layout_add(output_layout, wlr_output, lx, ly);
+	}
 
 	/* If length == 1 we need update selmon.
 	 * Maybe it will change in run(). */
