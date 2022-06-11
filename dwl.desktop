@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=dwl
+Comment=dwm for Wayland
+Exec=/usr/local/bin/dwl-session
+Type=Application
+X-GDM-SessionRegisters=true

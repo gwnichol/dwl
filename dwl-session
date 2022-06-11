@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Launch the dwl session for wayland
+
+cd "$HOME"
+
+if [ -f "$HOME/.wayprofile" ]; then
+    . "$HOME/.wayprofile"
+fi
+
+if [ -f "$HOME/.dwl-errors" ]; then
+    mv "$HOME/.dwl-errors"{,.old}
+fi
+
+if [ -f "$HOME/.cache/dwltags" ]; then
+    rm "$HOME/.cache/dwltags"
+fi
+
+exec sh -c "dwl 2> $HOME/.dwl-errors 1> $HOME/.cache/dwltags"
+

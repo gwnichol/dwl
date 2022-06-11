@@ -9,6 +9,9 @@ PKGS = wlroots wayland-server xcb xkbcommon libinput
 CFLAGS += $(foreach p,$(PKGS),$(shell pkg-config --cflags $(p)))
 LDLIBS += $(foreach p,$(PKGS),$(shell pkg-config --libs $(p)))
 
+PREFIX?= /usr/local
+DESKTOP?= /usr/share/wayland-sessions
+
 all: dwl
 
 clean:
@@ -25,10 +28,13 @@ dist: clean
 
 install: dwl
 	install -Dm755 dwl $(DESTDIR)$(PREFIX)/bin/dwl
+	install -Dm755 dwl-session $(DESTDIR)$(PREFIX)/bin/dwl-session
 	install -Dm644 dwl.1 $(DESTDIR)$(MANDIR)/man1/dwl.1
+	install -Dm644 dwl.desktop ${DESKTOP}/dwl.desktop
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/dwl $(DESTDIR)$(MANDIR)/man1/dwl.1
+	rm -f $(DESTDIR)$(PREFIX)/bin/dwl $(DESTDIR)$(PREFIX)/bin/dwl-session
+	rm -f $(DESTDIR)$(MANDIR)/man1/dwl.1 ${DESKTOP}/dwl.desktop
 
 .PHONY: all clean dist install uninstall
 
