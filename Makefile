@@ -30,11 +30,15 @@ install: dwl
 	install -Dm755 dwl $(DESTDIR)$(PREFIX)/bin/dwl
 	install -Dm755 dwl-session $(DESTDIR)$(PREFIX)/bin/dwl-session
 	install -Dm644 dwl.1 $(DESTDIR)$(MANDIR)/man1/dwl.1
-	install -Dm644 dwl.desktop ${DESKTOP}/dwl.desktop
+	install -Dm644 dwl.desktop $(DESKTOP)/dwl.desktop
+	install -Dm755 waybar-dwl/waybar-dwl.sh $(DESTDIR)$(PREFIX)/bin/waybar-dwl
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/dwl $(DESTDIR)$(PREFIX)/bin/dwl-session
-	rm -f $(DESTDIR)$(MANDIR)/man1/dwl.1 ${DESKTOP}/dwl.desktop
+	rm -f $(DESTDIR)$(PREFIX)/bin/dwl
+	rm -f $(DESTDIR)$(PREFIX)/bin/dwl-session
+	rm -f $(DESTDIR)$(MANDIR)/man1/dwl.1
+	rm -f $(DESKTOP)/dwl.desktop
+	rm -f $(DESTDIR)$(PREFIX)/bin/waybar-dwl
 
 .PHONY: all clean dist install uninstall
 
