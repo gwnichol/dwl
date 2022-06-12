@@ -62,17 +62,17 @@ dist: clean
 
 install: dwl
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp dwl $(DESTDIR)$(PREFIX)/bin
+	cp -f dwl $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dwl
-	cp dwl-session $(DESTDIR)$(PREFIX)/bin
+	cp -f dwl-session $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dwl-session
 	mkdir -p $(DESTDIR)$(MANDIR)/man1
-	cp dwl.1 $(DESTDIR)$(MANDIR)/man1
+	cp -f dwl.1 $(DESTDIR)$(MANDIR)/man1
 	chmod 644 $(DESTDIR)$(MANDIR)/man1/dwl.1
 	mkdir -p $(DESTDIR)$(DESKTOP)
-	cp dwl.desktop $(DESTDIR)$(DESKTOP)
+	cp -f dwl.desktop $(DESTDIR)$(DESKTOP)
 	chmod 644 $(DESTDIR)$(DESKTOP)/dwl.desktop
-	cp waybar-dwl/waybar-dwl.sh $(DESTDIR)$(PREFIX)/bin/waybar-dwl
+	cp -f waybar-dwl/waybar-dwl.sh $(DESTDIR)$(PREFIX)/bin/waybar-dwl
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/waybar-dwl
 
 uninstall:
