@@ -28,7 +28,8 @@ dwl: dwl.o util.o
 	$(CC) dwl.o util.o $(LDLIBS) $(LDFLAGS) -o $@
 dwl.o: dwl.c config.mk config.h client.h xdg-shell-protocol.h \
     wlr-layer-shell-unstable-v1-protocol.h idle-protocol.h \
-	pointer-constraints-unstable-v1-protocol.h
+	pointer-constraints-unstable-v1-protocol.h \
+	relative-pointer-unstable-v1-protocol.h
 util.o: util.c util.h
 
 # wayland scanner rules to generate .h / .c files
@@ -44,6 +45,9 @@ idle-protocol.h:
 pointer-constraints-unstable-v1-protocol.h:
 	$(WAYLAND_SCANNER) server-header \
 	$(WAYLAND_PROTOCOLS)/unstable/pointer-constraints/pointer-constraints-unstable-v1.xml $@
+relative-pointer-unstable-v1-protocol.h:
+	$(WAYLAND_SCANNER) server-header \
+	$(WAYLAND_PROTOCOLS)/unstable/relative-pointer/relative-pointer-unstable-v1.xml $@
 
 config.h:
 	cp config.def.h $@
