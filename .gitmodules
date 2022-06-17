@@ -1,3 +1,3 @@
 [submodule "waybar-dwl"]
 	path = waybar-dwl
-	url = ../waybar-dwl.git
+	url = https://codeberg.org/fauxmight/waybar-dwl.git
